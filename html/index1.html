@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" id="next" value="下一曲"/>
+		<input type="button" id="prev" value="上一曲"/>
+		<audio id="music" controls autoplay><!--音频-->
+			<source src="Maria Arredondo - Burning.mp3"></source>
+		</audio>
+		<!--<video id="play" controls loop autobuffer>视频
+		    <source src="One Direction - What Makes You Beautiful.mkv"></source>
+		</video>-->
+		<script type="text/javascript">
+//			var play = document.getElementById("play")
+			var music = document.getElementById("music");
+			var prev = document.getElementById("prev");
+			var next = document.getElementById("next");
+			var ovs = document.getElementsByTagName('source');
+			var arr = ['Maria Arredondo - Burning.mp3','One Direction - What Makes You Beautiful.mp3','南征北战 - 我的天空 - 影片剪辑版.mp3'];
+			var num = 0;
+//			music.onmouseover = function(){
+//				this.play();
+//			}
+//			music.onmouseout = function(){
+//				this.pause();
+//			}
+			prev.onclick = function(){
+				num --;
+				if(num<0){
+					num = 2;
+				}
+				ovs[0].src = arr[num];
+				music.load();
+			}
+			next.onclick = function(){
+				num ++;
+				num%=3;
+				ovs[0].src = arr[num];
+				music.load();
+			}
+//			play.currentTime = 60;//从一秒钟开始播放
+//			console.log(play.duration);//持续时间
+//			console.log(play.volume);//音量
+//			console.log(play.muted);//音量
+//			console.log(play.paused);//媒体是否暂停
+//			console.log(play.ended);//媒体是否播放完毕
+//			console.log(play.error);//媒体发生错误的时候，返回错误代码
+//			console.log(play.currentSrc)//以字符串的形式返回媒体地址
+		</script>
+	</body>
+</html>

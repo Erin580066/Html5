@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin:0;padding:0;}
+		</style>
+	</head>
+	<body>
+		<video id="ov" controls loop autobuffer>视频
+		    <source src="One Direction - What Makes You Beautiful.mkv"></source>
+		</video>
+		<script>
+			var oV = document.getElementById("ov");
+			oV.poster = '../img/11.jpg';//视频播放前的预览图片
+//			oV.width = window.innerWidth;
+//			oV.height = window.innerHeight;
+			oV.width = document.documentElement.clientWidth;
+			oV.height = document.documentElement.clientHeight;
+		</script>
+	</body>
+</html>

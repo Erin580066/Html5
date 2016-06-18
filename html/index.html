@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--自定义属性-->
+		<div id="box" data-miao="你好" data-miao-all="你好朋友"></div>
+		<!--表单事件-->
+		<form action="">
+			<input type="text" required id="text"/><!--required提交的时候表单不能为空-->
+			<input type="submit" />
+		</form>
+		<script type="text/javascript">
+			//自定义属性测试
+//			var oBox = document.getElementById("box");
+//			alert(oBox.dataset.miao)
+//			alert(oBox.dataset.miaoAll)
+			//输入表单的测试
+			var oText = document.getElementById("text");
+			oText.addEventListener('invalid',fn,false);
+			function fn(ev){
+				alert(this.validity.valid)//没输入内容弹一个false 输入的时候再点击提交会直接通过
+				ev.preventDefault();
+			}
+		</script>
+	</body>
+</html>

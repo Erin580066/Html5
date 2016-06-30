@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{background:#000;}
+			#c1{background:#fff;}
+		</style>
+	</head>
+	<body>
+		<canvas id="c1" width="400" height="400"><!--默认宽300，高150-->
+			<span>不支持canvas浏览器</span>
+		</canvas>
+		<script type="text/javascript">
+			var oC = document.getElementById("c1");
+			var oGC = oC.getContext('2d');
+			oGC.fillStyle = 'red';
+			oGC.strokeStyle = 'blue';
+			oGC.lineWidth = 10;//边框的宽度
+//			oGC.lineJoin = 'round';//圆角
+			oGC.lineJoin = 'bevel';//斜角
+			///strokeRect和fillRect  顺序不一样表现出来的效果就不一样
+//			oGC.strokeRect(50.5,50.5,100,100);///带边框的块
+			oGC.fillRect(50,50,100,100);///填充的块
+			oGC.strokeRect(50.5,50.5,100,100);///带边框的块
+			
+		</script>
+	</body>
+</html>

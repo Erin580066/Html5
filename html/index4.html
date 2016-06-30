@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			input{cursor: pointer;}
+		</style>
+	</head>
+	<body>
+		<video id="ov">视频
+		    <source src="One Direction - What Makes You Beautiful.mkv"></source>
+		</video>
+		<div id="">
+			<input type="button" value="播放"/>
+			<input type="button" value="00:00:00"/>
+			<input type="button" value="00:00:00"/>
+			<input type="button" value="静音"/>
+			<input type="button" value="全屏"/>
+		</div>
+		<script type="text/javascript">
+			var oV = document.getElementById("ov");
+			var inps = document.getElementsByTagName('input');
+			inps[0].onclick = function(){
+				if(oV.paused){
+					oV.play();
+					this.value = "暂停"
+				}else{
+					oV.pause();
+					this.value = "播放"
+				}
+			}
+		</script>	
+	</body>
+</html>

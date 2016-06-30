@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="">
+			<!--<input type="email" id="text" required/>-->
+			<input type="text" id="text" pattern="\d{1,5}"/>
+			<input type="submit" />
+		</form>
+		<script type="text/javascript">
+			var oText = document.getElementById("text");
+			oText.addEventListener('invalid',fn,false);
+			function fn(){
+//				alert(this.validity)//object ValidityState
+//				alert(this.validity.valid)///false
+//				alert(this.validity.valueMissing)///true  输入为空时返回true
+//				alert(this.validity.typeMismatch)///true  当输入类型与要求类型不一致时就会返回true
+				alert(this.validity.patternMismatch)//true 当输入类型与要求的正则不一致返回true
+				ev.preventDefault();
+			}
+		</script>
+	</body>
+</html>

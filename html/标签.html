@@ -56,5 +56,78 @@
 			<span>76</span>%
 		</progress>
 		<hr />
+		
+<!--html5表单控件-->	
+		<form >
+			<input type="email" />邮箱的输入
+			<input type="submit" />
+			<br />
+			<input type="tel" />电话号码   在移动端下会跳出输入键盘
+			<input type="submit" />
+			<br />
+			<input type="url" />输入网址
+			<input type="submit" />
+			<br />
+			<input type="range" step="2" min="0" max="10" value="0"/>
+			<br />
+			<input type="range" step="2" min="0" max="10" value="2"/>
+			<br />
+			<input type="number" />
+			<br />
+			<input type="color" />
+			<br />
+			<input type="datetime-local" />显示完整日期  不含时区
+			<br />
+			<input type="time" />  显示时间  不含时区
+			<br />
+			<input type="date" />  显示日期
+			<br />
+			<input type="week" />  显示周
+			<br />
+			<input type="month" /> 显示月
+			<br />
+			<input type="text" placeholder="请输入密码" name="user" autocomplete=""/>
+			<input type="submit" />
+			<!--autocomplete是否保存用户输入值-->
+			<input type="text" placeholder="请输入密码" name="user" autocomplete="off"/>
+			<input type="submit" />
+			<br />
+			<input type="password" autofocus=""/>autofocus指定表单输入焦点
+			<!--<input type="text" required="" />required此选项不能为空-->
+			<br />
+			<input type="text" placeholder="请输入1-5位数字" pattern="\d{1,5}"/>
+			<input type="submit" />
+		</form>
+		<form action="http://www.baidu.com" method="post">
+			<input type="text" />
+			<input type="submit" />
+			<input type="submit" value="保存至草稿箱" formaction="http://www.hao123.com/"/>
+		</form>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</body>
 </html>

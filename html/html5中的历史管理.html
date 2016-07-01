@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button"  id="btn" value="35选7" />
+		<div id="box"></div>
+		<script type="text/javascript">
+			var oBtn = document.getElementById("btn");
+			var oBox = document.getElementById("box");
+			var json = {};
+			oBtn.onclick = function(){
+				var Num = randomNum(35,7);
+				var oRd = Math.random();
+				json[oRd] = Num;
+				oBox.innerHTML = Num
+				window.location.hash = oRd;
+			}
+			window.onhashchange = function(){
+				oBox.innerHTML = json[window.location.hash.substring(1)] || '';
+			}
+			function randomNum(all,now){
+				var arr = [];
+				var newarr = [];
+				for (var i = 1; i <= all; i++) {
+					arr.push(i);
+				}
+				for (var i = 0; i <= now; i++) {
+					newarr.push(arr.splice(Math.floor(Math.random()*arr.length),1))
+				}
+				return newarr;
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div id="box" class="div">123</div>
+		<div class="div div1 div2 div3" id="div">123</div>
+		<script src="../js/json2.js"></script>
+		<script>
+//			var oBox = document.querySelector('#box');
+//			oBox.style.background = 'red';
+//			
+//			var oDiv = document.querySelector('.div');
+//			oDiv.style.background = 'green';
+			
+//			var oDiv1 = document.querySelectorAll('.div')
+//			for (var i = 0; i < oDiv1.length; i++) {
+//				oDiv1[i].style.background = 'red';
+//			}
+//			var oDiv2 =document.getElementsByClassName('div')
+//			for (var i = 0; i < oDiv2.length; i++) {
+//				oDiv2[i].style.background = 'red';
+//			}
+//获取class列表属性		
+//			var oDiv = document.getElementById("div");
+//			alert(oDiv.classList);/// div div1 div2 div3
+//			alert(oDiv.classList.length)///4
+//			oDiv.classList.add('div4')
+//			oDiv.classList.remove('div3')
+//			oDiv.classList.toggle('div3')//如果有就进行删除   没有就进行添加
+			
+//json的新方法		
+//			eval可以解析 任何形式的字符串
+//			json.parse 只能解析json形式的字符串         但是安全性高一些
+//			var str = 'function show(){alert(1)}';
+//			eval(str);
+//			show()
+//			
+//			var str1 = '{"name":"hello"}'  ///一定是严格的json格式
+//			var json = JSON.parse(str1)
+//			alert(json.name)
+			
+//			var json = {name:'hello ni hao'}
+//			var str = JSON.stringify(json);
+//			alert(str)
+			
+//			var a = {
+//				name:{age:133}
+//			}
+//			浅拷贝
+//			var b = {};
+//			for(var attr in a){
+//				b[attr]= a[attr]
+//			}
+//			b.name = 'nihao';
+//			alert(a.name)
+//			******这是另一种深拷贝的方法*****
+//			var str = JSON.stringify(a);
+//			var b = JSON.parse(str);
+//			b.name.age = 200;
+//			alert(a.name.age)
+			
+//			简单的递归
+			function test(n){
+				if(n==1){
+					return 1
+				}
+				return n*test(n-1)
+			}
+			alert(test(4));
+//			深拷贝的又一种方法
+			var obj= {
+				a:{name:'hello'}
+			}
+			function deepCopy(obj){
+				if(typeof obj != 'object'){
+					return obj;
+				}
+				var newObj = {};
+				for(var attr in obj){
+					newObj[attr]= deepCopy(obj[attr]);
+				}
+				return newObj;
+			}
+			var obj2 = deepCopy(obj);
+			obj2.a.name = 'nihaoma'
+			alert(obj.a.name)
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

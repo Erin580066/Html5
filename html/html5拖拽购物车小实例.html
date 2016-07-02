@@ -27,8 +27,6 @@
 				display:block;
 				clear:both;
 			}
-			.fl{float:left;}
-			.fr{float:right;}
 			#box{
 				width:600px;
 				height:300px;
@@ -36,7 +34,10 @@
 				clear: both;
 				margin:30px 50px;
 			}
-			#box span{width:200px;}
+			.span1{ float:left; width:200px;}
+			.span2{ float:left; width:200px;}
+			.span3{ float:left; width:200px;}
+			 #all{float:right;margin:10px;}
 		</style>
 	</head>
 	<body>
@@ -44,41 +45,43 @@
 			<li draggable="true">
 				<img src="../img/2.jpg" alt="" />
 				<p>图片一</p>
-				<p>$45</p>
+				<p>90￥</p>
 			</li>
 			<li draggable="true">
 				<img src="../img/3.jpg" alt="" />
 				<p>图片二</p>
-				<p>$145</p>
+				<p>190￥</p>
 			</li>
 			<li draggable="true">
 				<img src="../img/4.jpg" alt="" />
 				<p>图片三</p>
-				<p>$245</p>
+				<p>290￥</p>
 			</li>
 			<li draggable="true">
 				<img src="../img/5.jpg" alt="" />
 				<p>图片四</p>
-				<p>$345</p>
+				<p>390￥</p>
 			</li>
 		</ul>
 		<div id="box" class="clearfix">
 			<!--<p>
-				<span class="span1 fl">1</span>
-				<span class="span2 fl">图片一</span>
-				<span class="span3 fl">$45</span>
-			</p>
-			<p>
-				<span class="span1 fl">2</span>
-				<span class="span2 fl">图片二</span>
-				<span class="span3 fl">$145</span>
-			</p>
-			<div class="all fr">90</div>-->
+		    	<span class="span1">1</span>
+		        <span class="span2">图片一</span>
+		        <span class="span3">90￥</span>
+		    </p>
+		    <p>
+		    	<span class="span1">1</span>
+		        <span class="span2">图片一</span>
+		        <span class="span3">90￥</span>
+		    </p>
+		    <div id="all">90￥</div>-->
 		</div>
 		<script type="text/javascript">
 			var aLi = document.getElementsByTagName('li');
 			var oBox = document.getElementById("box");
 			var obj = {};
+			var num = 0;
+			var all = null;
 			for (var i = 0; i < aLi.length; i++) {
 				aLi[i].ondragstart = function(ev){
 					var aP = this.getElementsByTagName('p');
@@ -97,18 +100,40 @@
 				if(!obj[sTitle]){
 					var oP = document.createElement('P');
 					var oSpan = document.createElement('span');
+					oSpan.className = 'span1'
 					oSpan.innerHTML = 1;
 					oP.appendChild(oSpan)
+					
 					var oSpan = document.createElement('span');
+					oSpan.className = 'span2'
 					oSpan.innerHTML = sTitle;
 					oP.appendChild(oSpan)
+					
 					var oSpan = document.createElement('span');
+					oSpan.className = 'span3'
 					oSpan.innerHTML =sMoney;
 					oP.appendChild(oSpan)
+					
 					oBox.appendChild(oP)
+					obj[sTitle] = 1;
 				}else{
-					alert(1)
+					var oSpan1 = document.getElementsByClassName('span1');
+					var oSpan2 = document.getElementsByClassName('span2');
+					
+					for (var i = 0; i < oSpan2.length; i++) {
+						if(oSpan2[i].innerHTML == sTitle){
+							oSpan1[i].innerHTML = parseInt(oSpan1[i].innerHTML) + 1;
+						}
+					}
 				}
+				if(!all){
+					all = document.createElement('div');
+					all.id = 'all';
+					
+				}
+				num += parseFloat(sMoney);
+				all.innerHTML = num + '￥';
+				oBox.appendChild(all)
 			}
 			
 			

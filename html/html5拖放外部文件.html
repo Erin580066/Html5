@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			li{list-style:none;float:left;margin:5px;}
+			#box{
+				width:200px;
+				height:200px;
+				margin:150px;
+				background:red;
+			}
+			img{
+				width:100px;
+				height:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">将文件拖拽到此区域</div>
+		<ul id="list"></ul>
+		<script type="text/javascript">
+			var oBox = document.getElementById("box");
+			var oList = document.getElementById("list");
+			oBox.ondragenter = function(){
+				this.innerHTML = '可以释放了';
+			}
+			oBox.ondragover = function(ev){
+				ev.preventDefault();
+			}
+			oBox.ondragleave = function(){
+				this.innerHTML = '将文件拖拽到此区域';
+			}
+			oBox.ondrop = function(ev){
+				ev.preventDefault();
+				var fs = ev.dataTransfer.files;
+//				alert(fs.length)
+//				alert(fs[0].type)
+				for (var i = 0; i < fs.length; i++) {
+					if(fs[i].type.indexOf('image') != -1){
+						var fd = new FileReader();
+						fd.readAsDataURL(fs[i]);
+						fd.onload = function(){
+		//					alert(this.result);
+							var oLi = document.createElement('li');
+							var oImg = document.createElement('img');
+							oImg.src = this.result;
+							oLi.appendChild(oImg);
+							oList.appendChild(oLi);
+						}
+					}else{
+						alert('请选择正确的图片格式')
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

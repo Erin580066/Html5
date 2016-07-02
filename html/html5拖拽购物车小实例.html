@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			li{
+				list-style: none;
+				float:left;
+				width:150px;
+				border:1px solid #000;
+				margin:10px;
+			}
+			li img{
+				width:150px;
+				height:200px;
+				display:block;
+			}
+			p{
+				height:30px;
+				line-height: 30px;
+				border-bottom: 1px dotted #000;
+			}
+			.clearfix:after{
+				content: "";
+				display:block;
+				clear:both;
+			}
+			.fl{float:left;}
+			.fr{float:right;}
+			#box{
+				width:600px;
+				height:300px;
+				border:1px solid #000;
+				clear: both;
+				margin:30px 50px;
+			}
+			#box span{width:200px;}
+		</style>
+	</head>
+	<body>
+		<ul id="list">
+			<li draggable="true">
+				<img src="../img/2.jpg" alt="" />
+				<p>图片一</p>
+				<p>$45</p>
+			</li>
+			<li draggable="true">
+				<img src="../img/3.jpg" alt="" />
+				<p>图片二</p>
+				<p>$145</p>
+			</li>
+			<li draggable="true">
+				<img src="../img/4.jpg" alt="" />
+				<p>图片三</p>
+				<p>$245</p>
+			</li>
+			<li draggable="true">
+				<img src="../img/5.jpg" alt="" />
+				<p>图片四</p>
+				<p>$345</p>
+			</li>
+		</ul>
+		<div id="box" class="clearfix">
+			<!--<p>
+				<span class="span1 fl">1</span>
+				<span class="span2 fl">图片一</span>
+				<span class="span3 fl">$45</span>
+			</p>
+			<p>
+				<span class="span1 fl">2</span>
+				<span class="span2 fl">图片二</span>
+				<span class="span3 fl">$145</span>
+			</p>
+			<div class="all fr">90</div>-->
+		</div>
+		<script type="text/javascript">
+			var aLi = document.getElementsByTagName('li');
+			var oBox = document.getElementById("box");
+			var obj = {};
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].ondragstart = function(ev){
+					var aP = this.getElementsByTagName('p');
+					ev.dataTransfer.setData('title',aP[0].innerHTML);
+					ev.dataTransfer.setData('money',aP[1].innerHTML);
+					ev.dataTransfer.setDragImage(this,0,0)
+				}
+			}
+			oBox.ondragover = function(ev){
+				ev.preventDefault();
+			}
+			oBox.ondrop = function(ev){
+				ev.preventDefault();
+				var sTitle = ev.dataTransfer.getData('title')
+				var sMoney = ev.dataTransfer.getData('money')
+				if(!obj[sTitle]){
+					var oP = document.createElement('P');
+					var oSpan = document.createElement('span');
+					oSpan.innerHTML = 1;
+					oP.appendChild(oSpan)
+					var oSpan = document.createElement('span');
+					oSpan.innerHTML = sTitle;
+					oP.appendChild(oSpan)
+					var oSpan = document.createElement('span');
+					oSpan.innerHTML =sMoney;
+					oP.appendChild(oSpan)
+					oBox.appendChild(oP)
+				}else{
+					alert(1)
+				}
+			}
+			
+			
+			
+		</script>	
+	</body>
+</html>

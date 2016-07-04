@@ -15,15 +15,171 @@
 		<script type="text/javascript">
 			var oC = document.getElementById("c1");
 			var oGC = oC.getContext('2d');
-			oGC.fillStyle = 'red';
-			oGC.strokeStyle = 'blue';
-			oGC.lineWidth = 10;//边框的宽度
-//			oGC.lineJoin = 'round';//圆角
-			oGC.lineJoin = 'bevel';//斜角
-			///strokeRect和fillRect  顺序不一样表现出来的效果就不一样
+//			oGC.fillStyle = 'red';
+//			oGC.strokeStyle = 'blue';
+//			oGC.lineWidth = 10;//边框的宽度
+////			oGC.lineJoin = 'round';//圆角
+//			oGC.lineJoin = 'bevel';//斜角
+//			///strokeRect和fillRect  顺序不一样表现出来的效果就不一样
+////			oGC.strokeRect(50.5,50.5,100,100);///带边框的块
+//
+//			oGC.fillRect(50,50,100,100);///填充的块
 //			oGC.strokeRect(50.5,50.5,100,100);///带边框的块
-			oGC.fillRect(50,50,100,100);///填充的块
-			oGC.strokeRect(50.5,50.5,100,100);///带边框的块
+			
+//			oGC.save();
+//			oGC.fillStyle = 'red';
+//			oGC.beginPath();
+//			oGC.moveTo(100,100);
+//			oGC.lineTo(200,200);
+//			oGC.lineTo(300,200);
+//			oGC.closePath();
+//			oGC.fill();
+//			oGC.stroke();
+//			oGC.restore();
+//			
+//			oGC.beginPath();
+//			oGC.moveTo(100,200);
+//			oGC.lineTo(200,300);
+//			oGC.lineTo(300,300)
+//			oGC.closePath();
+//			oGC.fill();
+//			oGC.stroke();
+			
+//			oGC.beginPath();
+//			oGC.rect(100,100,100,100);
+//			oGC.closePath();
+//			oGC.fillStyle = 'red';
+//			oGC.fill();
+//			oGC.stroke();
+//			oGC.clearRect(0,0,oC.width,oC.height);////清除画布
+			
+//鼠标移动画线小实例			
+//			oC.onmousedown = function(ev){
+//				var ev = ev || event;
+//				oGC.moveTo(ev.clientX-oC.offsetLeft,ev.clientY-oC.offsetTop);
+//				document.onmousemove = function(ev){
+//					var ev = ev || event;
+//					oGC.lineTo(ev.clientX-oC.offsetLeft,ev.clientY-oC.offsetTop);
+//					oGC.stroke();
+//				};
+//				document.onmouseup = function(){
+//					document.onmouseup = document.onmousemove = null;
+//				}
+//			}
+//点击方块移动小实例	
+//			var num = 0
+//			oGC.fillStyle = 'red';
+//			oGC.fillRect(0,0,100,100);
+//			setInterval(function(){
+//				num++;
+//				oGC.clearRect(0,0,oC.width,oC.height)
+//				oGC.fillRect(num,num,100,100);
+//			},30)
+//画圆			
+//			oGC.moveTo(200,200)
+////			弧度 = 角度*Math.PI/180
+////			oGC.arc(200,200,150,0,90*Math.PI/180,false);
+//			oGC.arc(200,200,150,0,90*Math.PI/180,true);
+//			oGC.closePath();
+//			oGC.stroke();
+//			oGC.fill();
+//canvas画表盘	
+			function toDrow(){
+				var x = 200;//起始点x轴
+				var y = 200;//起始点y轴
+				var r = 150;//圆半径
+				oGC.beginPath();
+				for (var i = 0; i < 60; i++) {
+					oGC.moveTo(x,y);
+					oGC.arc(x,y,r,6*i*Math.PI/180,6*(i+1)*Math.PI/180,false)
+				}
+				oGC.closePath();
+				oGC.stroke();
+//				先用一层白色的层覆盖一下
+				oGC.fillStyle = 'white';
+				oGC.beginPath();
+				oGC.moveTo(x,y);
+				oGC.arc(x,y,r*19/20,0,360*Math.PI,false)
+				oGC.closePath();
+				oGC.fill();
+//				把12个刻度画出来
+				oGC.lineWidth = 3;
+				oGC.beginPath();
+				
+				for (var i = 0; i < 12; i++) {
+					oGC.moveTo(x,y);
+					oGC.arc(x,y,r,30*i*Math.PI/180,30*(i+1)*Math.PI/180,false)
+				}
+				oGC.closePath();
+				oGC.stroke();
+//				再覆盖一层
+				oGC.fillStyle = 'white';
+				oGC.beginPath();
+				oGC.moveTo(x,y);
+				oGC.arc(x,y,r*18/20,0,360*Math.PI,false)
+				oGC.closePath();
+				oGC.fill();
+//				时针
+				oGC.beginPath();
+				oGC.lineWidth = 5
+				oGC.moveTo(x,y);
+				oGC.arc(x,y,r*12/20,0,0,false)
+				oGC.closePath();
+				oGC.stroke();
+//				分针
+				oGC.beginPath();
+				oGC.lineWidth = 3
+				oGC.moveTo(x,y);
+				oGC.arc(x,y,r*14/20,1,1,false)
+				oGC.closePath();
+				oGC.stroke();
+//				秒针
+				oGC.beginPath();
+				oGC.lineWidth = 1
+				oGC.moveTo(x,y);
+				oGC.arc(x,y,r*18/20,2,2,false)
+				oGC.closePath();
+				oGC.stroke();
+				
+			}
+			toDrow();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		</script>
 	</body>

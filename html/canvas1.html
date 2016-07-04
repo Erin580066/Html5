@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	body{background:#000;}
+	#c1{background:#fff;}
+</style>
+</head>
+<body>
+<canvas id="c1" width="400" height="400"></canvas>
+<script type="text/javascript">
+	var oC = document.getElementById("c1");
+	var oGC = oC.getContext('2d');
+//变换	
+//	oGC.translate(100,100);
+//	oGC.rotate(45*Math.PI/180);//以左上角为为几点旋转
+//	oGC.scale(2,2);//缩放
+//	oGC.fillRect(0,0,100,100);
+//旋转小方块	
+	var num = 0;
+	var num1 = 0;
+	var value = 1;
+	setInterval(function(){
+		num++;
+		oGC.save();
+		oGC.clearRect(0,0,oC.width,oC.height);
+		oGC.translate(100,100)
+		if(num1 == 100){
+			value = -1;
+		}else if(num1 == 0){
+			value = 1;
+		}
+		num1 += value;
+		oGC.scale(num1*1/50,num1*1/50)
+		oGC.fillStyle = 'red';
+		oGC.rotate(num*Math.PI/180);
+		oGC.translate(-50,-50)
+		oGC.fillRect(0,0,100,100);
+		oGC.restore();
+	},30)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

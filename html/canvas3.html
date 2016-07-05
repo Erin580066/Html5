@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	body{background:#000;}
+	#c1{background:#fff;}
+</style>
+</head>
+<body>
+<canvas id="c1" width="400" height="400"></canvas>
+<script type="text/javascript">
+	var oC = document.getElementById("c1");
+	var oGC = oC.getContext('2d');
+//背景图
+//	var yImg = new Image();
+//	yImg.onload = function(){
+//		draw(this);
+//	}
+//	yImg.src = '../img/2.jpeg';
+//	function draw(obj){
+//		var bG = oGC.createPattern(obj,'repeat');
+//		oGC.fillStyle = bG;
+//		oGC.fillRect(0,0,400,400)
+//	}
+
+//线性渐变 createLinearGradient	
+//	var obj = oGC.createLinearGradient(150,100,150,200);
+//	var obj = oGC.createLinearGradient(150,100,250,200);
+//	obj.addColorStop(0,'red');
+//	obj.addColorStop(0.8,'green');
+//	obj.addColorStop(1,'blue');
+//	
+//	oGC.fillStyle = obj;
+//	oGC.fillRect(150,100,400,200)
+
+//放射性渐变 createRadialGradient	
+//	var obj = oGC.createRadialGradient(200,200,100,200,200,150)
+//	obj.addColorStop(0,'red');
+//	obj.addColorStop(0.5,'green');
+//	obj.addColorStop(1,'blue');
+//	oGC.fillStyle = obj;
+//	oGC.fillRect(0,0,oC.width,oC.height)//画布大小
+//文字
+//	oGC.font = '60px inpact';
+//	oGC.textBaseline = 'top';
+//	oGC.fillStyle = 'mediumvioletred'
+//	oGC.strokeStyle = 'red'
+//	oGC.fillText('东东',0,0)
+//	oGC.strokeText('东东',0,100)
+
+//文字居中	measureText(str).width   没有高度
+	oGC.font = '60px inpact';
+	oGC.textBaseline = 'top';
+	oGC.shadowOffsetX = -15;//阴影有正负之分
+	oGC.shadowOffsetY = -10;
+	oGC.shadowBlur = 3;//阴影模糊值
+	oGC.shadowColor = 'cyan';
+	var w = oGC.measureText('东东').width;
+	oGC.fillText('东东',(oC.width-w)/2,(oC.height-60)/2)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

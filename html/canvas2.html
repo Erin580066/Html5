@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{background:#000;}
+			#c1{background:#fff;}
+			/*img{width:500px;height:300px;}*/
+		</style>
+	</head>
+	<body>
+		<input type="button" value="←"/>
+		<input type="button" value="→"/>
+		<div id="box">
+			<img src="../img/2.jpeg"/>
+		</div>
+		<script type="text/javascript">
+			var inps = document.getElementsByTagName('input');
+			var oImg = document.getElementsByTagName('img')[0];
+			var yImg = new Image();
+			var inow = 0
+			
+			yImg.onload = function(){
+				draw(oImg);
+			}
+			yImg.src = oImg.src;
+			function draw(obj){
+				var oC = document.createElement('canvas');
+				var oGC = oC.getContext('2d');
+				oC.width = obj.width;
+				oC.height = obj.height;
+				obj.parentNode.replaceChild(oC,obj);
+				oGC.drawImage(obj,0,0)
+				inps[0].onclick = function(){
+					inow--
+					if(inow == 0){
+						inow = 4
+					}
+					
+					tochange();
+				}
+				inps[1].onclick = function(){
+					
+					if(inow == 4){
+						inow = 0;
+					}
+					inow++;
+					tochange();
+				}
+				
+				function tochange(){
+					switch(inow){
+						case 1:
+						oC.width = obj.height;
+						oC.height = obj.width;
+						oGC.rotate(90*Math.PI/180);
+						oGC.drawImage(obj,0,-obj.height);
+						break;
+						case 2:
+						oC.width = obj.width;
+						oC.height = obj.height;
+						oGC.rotate(180*Math.PI/180);
+						oGC.drawImage(obj,-obj.width,-obj.height);
+						break;
+						case 3:
+						oC.width = obj.height;
+						oC.height = obj.width;
+						oGC.rotate(270*Math.PI/180);
+						oGC.drawImage(obj,-obj.width,0);
+						break;
+						case 4:
+						oC.width = obj.width;
+						oC.height = obj.height;
+						oGC.rotate(0);
+						oGC.drawImage(obj,0,0);
+						break;
+					}
+					
+				}
+			}
+		</script>
+	</body>
+</html>

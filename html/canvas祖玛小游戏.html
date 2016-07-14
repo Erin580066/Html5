@@ -52,20 +52,31 @@
 		setInterval(function(){
 			for (var i = 0; i < ball.length; i++) {
 				ball[i].num++;
+				if(ball[i].num == 270){
+					ball[i].r = 150;
+					ball[i].startX = 250;
+					ball[i].startY = 50;
+				}
+				if(ball[i].num == 270 + 180){
+					alert('game over')
+					window.location.reload()
+				}
 				ball[i].x = Math.sin(ball[i].num*Math.PI/180)*ball[i].r + ball[i].startX;
 				ball[i].y = ball[i].r-Math.cos(ball[i].num*Math.PI/180)*ball[i].r + ball[i].startY;
 			}
 		},30)
 //		在起始点生成一个圆
 		var ball = [];
-		ball[0] = {
-			x : 300,
-			y : 0,
-			r : 200,
-			num : 0,
-			startX : 300,
-			startY : 0
-		}
+		setInterval(function(){
+			ball.push({
+				x : 300,
+				y : 0,
+				r : 200,
+				num : 0,
+				startX : 300,
+				startY : 0
+			})
+		},500)
 	</script>
 </body>
 </html>

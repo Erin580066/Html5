@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	body{background:#000;margin:0;}
+	#box{background:#fff;width:600px;margin:0 auto;}
+</style>
+</head>
+<body>
+	<div id="box">
+		<canvas id="c1" width="600" height="600"></canvas>
+	</div>
+	<script>
+		var oC = document.getElementById("c1");
+		var oGC = oC.getContext('2d');
+		var i = 0;
+//		外面大圆
+//		oGC.beginPath();
+//		oGC.arc(300,200,200,-90*Math.PI/180,180*Math.PI/180,false)
+//		oGC.stroke();
+//		
+//		oGC.beginPath();
+//		oGC.arc(250,200,150,180*Math.PI/180,360*Math.PI/180,false)
+//		oGC.stroke();
+//		
+//		oGC.beginPath();
+//		oGC.arc(400,200,20,0,360*Math.PI/180,false)
+//		oGC.stroke();
+		
+		setInterval(function(){
+			oGC.clearRect(0,0,oC.width,oC.height);
+			oGC.beginPath();
+			oGC.arc(i++,i++,20,0,360*Math.PI/180,false)
+			oGC.stroke();
+		},30)
+		
+		
+	</script>
+</body>
+</html>

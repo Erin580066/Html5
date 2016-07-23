@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	#box{width:200px;height:200px;border:10px solid red;float:left;margin:0 20px;}
+	#list{width:200px;height:200px;border:10px solid blue;float:left;list-style:none;padding:0;margin:0;}
+	 li{width:150px;height:30px;margin:5px 0;background:#ccc;line-height:30px;text-align:center;list-style:none;}
+</style>
+</head>
+<body>
+	<div id="box"></div>
+	<ul id="list">
+		<li>我是老大</li>
+		<li>我是老二</li>
+		<li>我是老三</li>
+		<li>我是老四</li>
+	</ul>
+	<script>
+		var oBox = document.getElementById("box");
+		var oList = document.getElementById("list");
+		var lis = document.getElementsByTagName("li");
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].draggable = true;
+			lis[i].flag = false;
+			lis[i].ondragstart = function(){
+				this.flag = true;
+			}
+			lis[i].ondragend = function(){
+				this.flag = false;
+			}
+		}
+		drag(oBox);
+		drag(oList);
+		function drag(obj){
+			obj.ondragenter = function(ev){
+				ev.preventDefault();
+			}
+			obj.ondragover = function(ev){
+				ev.preventDefault();
+			}
+			obj.ondragleave = function(ev){
+				ev.preventDefault();
+			}
+			obj.ondrop = function(ev){
+				ev.preventDefault();
+				for (var i = 0; i < lis.length; i++) {
+					if(lis[i].flag){
+						obj.appendChild(lis[i]);
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

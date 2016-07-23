@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	div{width:100px;height:100px;background:red;}
+</style>
+</head>
+<body>
+	<!--html5可以不用闭合，属性可以不加""或''-->
+	<!--<table border=5 >
+		<tr>
+			<td>1
+			<td>1
+		<tr>
+			<tr>
+			<td>1
+			<td>1
+	</table>-->
+	<progress max="10" min="0" value="0"></progress>
+	
+	<!--目前只适用与火狐浏览器-->
+	<div id="menu" contextmenu=one></div>
+	<menu id="one" type=context>
+		<menuitem label="我是第一个菜单" icon="../img/1.jpg" onclick="(function(){
+			location.herf='http://baidu.com'
+		})()"></menuitem>
+	</menu>
+	<div contenteditable="true">我能编辑</div>
+	<div hidden>我能隐藏</div>
+	<script type="text/javascript">
+		var pro = document.getElementsByTagName('progress')[0];
+		var timer = null;
+		timer = setInterval(function(){
+			if(pro.value == 10){
+				clearInterval(timer);
+				document.body.removeChild(pro);
+				var span = document.createElement('span');
+				span.innerHTML = '加载完成';
+				document.body.appendChild(span);
+			}else{
+				pro.value += 1;
+			}
+		},300)
+	</script>
+</body>
+</html>

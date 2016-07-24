@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>音频视频</title>
+<style type="text/css">
+	#box{
+		width:600px;
+		height:30px;
+		background:red;
+		border:3px solid #000;
+		box-shadow: 1px 1px 2px green;
+		border-radius:10px;
+	}
+	.play{
+		width:0;
+		height:0;
+		border-left:15px solid #fff;
+		border-top:12px solid rgba(255,255,255,0);
+		border-bottom:12px solid rgba(255,255,255,0);
+		float:left;
+		margin:3px 0 0 10px;
+	}
+	.pause{
+		width:6px;
+		height:15px;
+		border-left:4px solid #fff;
+		border-right:4px solid #fff;
+		float:left;
+		margin:7px 0 0 10px;
+	}
+	#progress{
+		width:60%;
+		height:8px;
+		background: #fff;
+		border:3px solid #000;
+		box-shadow: 1px 1px 2px #000;
+		border-radius:10px;
+		float:left;
+		margin:8px 0 0 10px;
+		position:relative;
+	}
+	#bar{
+		width:10%;
+		height:100%;
+		background:gray;
+		border-radius: 5px;
+		position: absolute;
+		left:0;
+		top:0;
+	}
+	#control{
+		width:20px;
+		height:20px;
+		background:#fff;
+		border:2px solid #000;
+		border-radius:100%;
+		position:absolute;
+		left:0;
+		top:-7px;
+	}
+	.soundon{
+	  width:10px;height:8px;
+	  border-right:13px solid #fff;
+	  border-top:6px solid rgba(255,255,255,0);
+	  border-bottom:6px solid rgba(255,255,255,0);
+	  float:left;
+	  margin:5px 0 0 3px;
+	  cursor:pointer;
+	}
+	.soundoff{
+	  width:10px;height:8px;
+	  border-right:13px solid #000;
+	  border-top:6px solid rgba(255,255,255,0);
+	  border-bottom:6px solid rgba(255,255,255,0);
+	  float:left;
+	  margin:5px 0 0 3px;
+	  cursor:pointer;
+	}
+	 #volume{
+	  float:left;
+	  width:15%;height:5px;background:#fff;
+	  box-shadow:1px 1px 2px 2px #232;
+	  border-radius:5px;
+	  margin:11px 0 0 5px;
+	  position:relative;
+	}
+	#volume-bar{
+	 width:10%;height:100%;background:#ccc;border-radius:3px;
+	 display:inline-block;position:absolute;top:0;left:0;
+	}
+	#volume-control{
+	  width:15px;height:15px;position:absolute;border-radius:100%;
+	  left:0;top:-4px;background:#fff;box-shadow:1px 1px 2px 2px #132;
+	  cursor:pointer;
+	}
+</style>
+</head>
+<body>
+<video id="ov" >
+	<source src="One Direction - What Makes You Beautiful.mkv"></source>
+</video>
+<div id="box">
+	<div id="play" class="play"></div>
+	<div id="progress">
+		<span id="bar"></span>
+		<div id="control"></div>
+	</div>
+	<div id="sound" class="soundoff"></div>
+	<div id="volume">
+		 <span id="volume-bar">
+		 </span>
+		 <div id="volume-control">
+		 </div>
+	</div>
+</div>
+<script>
+	var oV = document.getElementById("ov");
+	var oPlay = document.getElementById("play");
+	
+	oPlay.onclick = function(){
+		if(oV.paused){
+			oPlay.className = 'pause';
+			oV.play();
+		}else{
+			oPlay.className = 'play';
+			oV.pause();
+		}
+	}
+</script>
+</body>
+</html>

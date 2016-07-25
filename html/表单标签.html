@@ -3,9 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css">
+	#allmap{
+		width:1000px;
+		height:1000px;
+	}
+</style>
 </head>
 <body>
-	<form action="" method="post" enctype="multipart/form-data">
+	<div id="allmap"></div>
+	<form action="1.php" method="post" enctype="multipart/form-data">
 		姓名:<input type="text" name="names" autofocus="true"/><br/>
 		邮件:<input type="email" name="email" required autocomplete="off"><br/>
 		个人主页:<input type="url" name="url" /><br/>
@@ -17,6 +24,44 @@
 		搜索:<input type="search" name="" results=s placeholder="请输入内容"/><br/>
 		颜色拾取器:<input type="color" /><br />
 		可以上传多个文件:<input type="file" name="img[]" multiple="multiple"/><br />
+		年龄:<input type="text" list="li" />
+		<datalist id="li">
+			<option >20</option>
+			<option >30</option>
+			<option >40</option>
+		</datalist>
+		<input type="submit" value="添加" name="sub"/>
+		<input type="submit" value="更改" name="sub1" formaction="3.php" formmethod="get"/>
 	</form>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ED2d81c757f7791bca47640cce651789"></script>
+	<script>
+		function success(position){
+//			alert(position.coords.latitude);
+//			alert(position.coords.longitude);
+			var la = position.coords.latitude;
+			var lo = position.coords.longitude;
+			var map = new BMap.Map("allmap");
+			map.centerAndZoom(new BMap.Point(lo,la), 14);
+			
+			var local = new BMap.LocalSearch(map, {
+			  renderOptions:{map: map}
+			});
+			local.searchInBounds("银行", map.getBounds());
+			
+			map.addEventListener("dragend",function(){
+			    map.clearOverlays();
+			    local.searchInBounds("银行", map.getBounds());
+			});
+		}
+		function error(errorCode){
+			alert(errorCode.code + '--'+ errorCode.Message)
+		}
+		var options = {};
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(success,error,options)
+		}else{
+			'你的浏览器out了'
+		}
+	</script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	body{background:#000;}
+	#canvas{background:#fff;}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		var oC = document.getElementById("canvas");
+		var oGC = oC.getContext('2d');
+		oGC.lineWidth = 10;
+		oGC.strokeStyle = 'red';
+		oGC.lineCap = 'round'
+		oGC.moveTo(250,400);
+		oGC.lineTo(250,350);
+		oGC.stroke();
+		oC.onmousemove = function(e){
+			var x = e.layerX;
+			var y = e.layerY;
+			var startX = 250;
+			var startY = 400;
+			var num = Math.atan2((y-startY),(x-startX));
+			oGC.clearRect(0,0,500,500);
+			oGC.beginPath();
+			oGC.moveTo(startX,startY);
+			oGC.lineTo(startX + 40*Math.cos(num),startY + 40*Math.sin(num));
+			oGC.stroke();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	#canvas{background:#DEDEDE;}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		var oC = document.getElementById("canvas");
+		var oGC = oC.getContext('2d');
+		oGC.beginPath();
+		oGC.moveTo(250,100);
+		oGC.lineTo(250,250);
+		oGC.stroke();
+//		水平对齐
+		oGC.beginPath();
+		oGC.font = '30px 宋体';
+		oGC.textAlign = "start";
+		oGC.fillText('start',250,100)
+		
+		oGC.beginPath();
+		oGC.font = '30px 宋体';
+		oGC.textAlign = "end";
+		oGC.fillText('end',250,130);
+		
+		oGC.beginPath();
+		oGC.font = '30px 宋体';
+		oGC.textAlign = "center";
+		oGC.fillText('center',250,160);
+		
+		oGC.beginPath();
+		oGC.font = '30px 宋体';
+		oGC.textAlign = "left";
+		oGC.fillText('left',250,190);
+		
+		oGC.beginPath();
+		oGC.font = '30px 宋体';
+		oGC.textAlign = "right";
+		oGC.fillText('right',250,210);
+//		垂直对齐
+		oGC.beginPath();
+		oGC.moveTo(100,400);
+		oGC.lineTo(600,400);
+		oGC.stroke();
+		
+		oGC.beginPath();
+		oGC.font = '20px 宋体';
+		oGC.textBaseline = 'alphabetic';
+		oGC.fillText('alphabetic',150,400);
+		
+		oGC.beginPath();
+		oGC.font = '20px 宋体';
+		oGC.textBaseline = 'top'
+		oGC.fillText('top',170,400);
+		
+		oGC.beginPath();
+		oGC.font = '20px 宋体';
+		oGC.textBaseline = 'middle'
+		oGC.fillText('middle',250,400);
+		
+		oGC.beginPath();
+		oGC.font = '20px 宋体';
+		oGC.textBaseline = 'ideographic'
+		oGC.fillText('ideographic',370,400);
+		
+		oGC.beginPath();
+		oGC.font = '20px 宋体';
+		oGC.textBaseline = 'bottom'
+		oGC.fillText('bottom',440,400);
+	</script>
+</body>
+</html>

@@ -71,6 +71,14 @@
 		oGC.font = '20px 宋体';
 		oGC.textBaseline = 'bottom'
 		oGC.fillText('bottom',440,400);
+		
+		oGC.beginPath();
+		oGC.font = '50px 宋体';
+		oGC.textBaseline = 'bottom'
+		var w = oGC.measureText('你好啊').width;
+//		oGC.strokeText('你好啊',(500-w)/2,400);
+		oGC.strokeText('你好啊',(500-w)/2,400,50);
+//		alert(oGC.measureText('你好啊').width);
 	</script>
 </body>
 </html>

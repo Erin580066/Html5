@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+	<style type="text/css">
+		#canvas{background:#888;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script>
+		var oC = document.getElementById("canvas");
+		var oGC = oC.getContext('2d');
+		oGC.rect(50,50,100,100);
+		oGC.fill();
+		var num = 0;
+		oC.onclick = function(e){
+			var x = e.layerX;
+			var y = e.layerX;
+			if(oGC.isPointInPath(x,y)){
+				setInterval(function(){
+					oGC.clearRect(0,0,oC.width,oC.height);
+					num++;
+					oGC.save();
+					oGC.translate(100,100);
+					oGC.scale(Math.sin(num*Math.PI/180),Math.sin(num*Math.PI/180));
+					oGC.rotate(num*Math.PI/180);
+					oGC.translate(-50,-50);
+					oGC.beginPath();
+					oGC.rect(0,0,100,100);
+					oGC.fill();
+					oGC.restore();
+				},30)
+			}
+		}
+	</script>
+</body>
+</html>

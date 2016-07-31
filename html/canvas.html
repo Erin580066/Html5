@@ -12,9 +12,16 @@
 		<canvas id="c1" width="400" height="400"><!--默认宽300，高150-->
 			<span>不支持canvas浏览器</span>
 		</canvas>
+		<audio src="1.mp3" id="audio"></audio>
 		<script type="text/javascript">
 			var oC = document.getElementById("c1");
 			var oGC = oC.getContext('2d');
+			var oAudio = document.getElementById("audio");
+//			oAudio.ontimeupdate=function  () {
+//		 		if(oAudio.currentTime>=0.1){
+//		   			oAudio.pause();
+//		 		}
+//			} 
 //			oGC.fillStyle = 'red';
 //			oGC.strokeStyle = 'blue';
 //			oGC.lineWidth = 10;//边框的宽度
@@ -88,7 +95,9 @@
 				var x = 200;//起始点x轴
 				var y = 200;//起始点y轴
 				var r = 150;//圆半径
-				oGC.clearRect(0,0,oC.width,oC.height)
+				oGC.clearRect(0,0,oC.width,oC.height);
+				oAudio.currentTime=0;
+		        oAudio.play();
 				var oDate = new Date();
 				var oHour = oDate.getHours();
 				var oMin = oDate.getMinutes();
@@ -130,7 +139,9 @@
 				oGC.closePath();
 				oGC.fill();
 //				时针
+				oGC.lineCap = 'round';
 				oGC.beginPath();
+				
 				oGC.lineWidth = 5
 				oGC.moveTo(x,y);
 				oGC.arc(x,y,r*12/20,oHourvalue,oHourvalue,false)
@@ -150,7 +161,12 @@
 				oGC.arc(x,y,r*18/20,oSecvalue,oSecvalue,false)
 				oGC.closePath();
 				oGC.stroke();
-				
+//				中间圆
+				oGC.fillStyle = 'red';
+				oGC.beginPath();
+				oGC.arc(x,y,10,360*Math.PI/180,false);
+				oGC.stroke();
+				oGC.fill();
 			}
 			setInterval(toDrow,1000);
 			toDrow();

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	#canvas{background:#EFEFED;}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="600"></canvas>
+	<script>
+		var oC = document.getElementById("canvas");
+		var oGC = oC.getContext('2d');
+		var num = 0;
+		var timer = null;
+		var angle = 150;
+		var arr =[];
+		timer = setInterval(function(){
+			if(angle<=0){
+				clearInterval(timer);
+			}else{
+				oGC.clearRect(0,0,oC.width,oC.height);
+				for (var i = 0; i < arr.length; i++) {
+					oGC.save();
+					oGC.translate(300,300);
+					oGC.scale(arr[i].scales,arr[i].scales)
+					oGC.rotate(arr[i].num*Math.PI/180);
+					oGC.fillStyle = arr[i].color;
+					oGC.fillRect(arr[i].angle,arr[i].angle,30,30);
+					oGC.restore();
+				}
+				
+			}
+		},70)
+		setInterval(function(){
+			for (var i = 0; i < arr.length; i++) {
+				if(arr[i].angle <=0){
+					arr.splice(i,1);
+					continue;
+				}
+				arr[i].num += 2;
+				arr[i].angle -= 0.5;
+				arr[i].scales -= 0.002;
+				if(arr[i].scales<= 0.2){
+					arr[i].scales = 0.2
+				}
+			}
+		},70);
+		setInterval(function(){
+			var rect = {
+				num:0,
+				angle:150,
+				scales:1,
+				color:"rgb("+parseInt(Math.random()*255)+","+parseInt(Math.random()*255)+","+parseInt(Math.random()*255)+")"
+			}
+			arr.push(rect);
+		},1000);
+	</script>
+</body>
+</html>

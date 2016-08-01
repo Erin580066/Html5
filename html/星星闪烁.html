@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>闪烁的星星</title>
+<style type="text/css">
+	#canvas{background:#888;}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		var oC = document.getElementById("canvas");
+		var oGC = oC.getContext('2d');
+		
+		
+//		画星星
+		drawStar(100,100,50,10,8,'fill','red')
+		function drawStar(x,y,r1,r2,num,drawStyle,color){
+//			记录点的位置
+			var angle = 360/(num*2);
+			var arr =[];
+			for (var i = 0; i < num*2; i++) {
+				var starObj = {};
+				if(i%2 == 0){
+					starObj.x = x + r1 * Math.cos(i*angle*Math.PI/180);
+					starObj.y = y + r1 * Math.sin(i*angle*Math.PI/180);
+				}else{
+					starObj.x = x + r2 * Math.cos(i*angle*Math.PI/180);
+					starObj.y = y + r2 * Math.sin(i*angle*Math.PI/180);
+				}
+				arr.push(starObj)
+			};
+//			绘图
+			oGC.beginPath();
+			oGC.fillStyle = color;
+			oGC.strokeStyle = color;
+			oGC.moveTo(arr[0].x,arr[0].y);
+			for (var i = 1; i < arr.length; i++) {
+				oGC.lineTo(arr[i].x,arr[i].y);
+			}
+			oGC.closePath();
+			if(drawStyle == 'fill'){
+				oGC.fill();
+			}else{
+				oGC.stroke();
+			}
+		}
+	</script>
+</body>
+</html>

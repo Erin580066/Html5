@@ -8,39 +8,76 @@
 </style>
 </head>
 <body>
+	<input type="button" value="开始抽奖" id="btn"/>
 	<canvas id="canvas" width="500" height="500"></canvas>
+	
 	<script>
 		var oC = document.getElementById("canvas");
 		var oGC = oC.getContext('2d');
+		var oBtn = document.getElementById("btn");
 		var num = Math.PI/180;
-		var textArr = ['一等奖','二等奖','三等奖','四等奖','五等奖','六等奖','七等奖','八等奖']
-		var colorArr = ['red','yellow','green','plum','blue','orange','pink','peru']
+		var timer = null;
+		var textArr = ['一等奖','谢谢参与','二等奖','谢谢参与','三等奖','谢谢参与','纪念奖','谢谢参与'];
+		var colorArr = ['red','yellow','green','plum','blue','orange','pink','peru'];
+		var angle = 0;//设定其实旋转度数
+		var step = 10 + 10*Math.random();//每30毫秒前进的
 		oGC.translate(250,250);
-//		绘制扇形
-		for (var i = 1; i <= 8; i++) {
-			oGC.beginPath();
-			oGC.moveTo(0,0);
-			oGC.fillStyle = colorArr[i-1];
-			oGC.arc(0,0,150,(i-1)*45*num,i*45*num,false);
-			oGC.closePath();
-			oGC.stroke();
-			oGC.fill();
+		oBtn.onclick = function(){
+			location.reload();
 		}
-//		添加白盘
-		oGC.beginPath();
-		oGC.fillStyle = '#fff';
-		oGC.arc(0,0,60,0,360*Math.PI/180,false);
-		oGC.fill();
-//		添加文字
-		for (var i = 0; i < 8; i++) {
-			oGC.save();
-			oGC.beginPath();
-			oGC.rotate((i*45+25)*num);
-			oGC.fillStyle = '#222';
-			oGC.font = '15px 微软雅黑';
-			oGC.fillText(textArr[i],75,0)
-			oGC.restore();
-		}
+		clearInterval(timer);
+		timer = setInterval(function(){
+			if(step <= 0.3){
+				clearInterval(timer);
+				var num1 = Math.ceil(angle/45);
+				var con = textArr[textArr.length-num1];
+				oGC.font = '14px 微软雅黑';
+				oGC.textAlign = 'center';
+				oGC.fillText(con,0,0);
+			}else{
+				if(angle>=360){
+					angle = 0;
+				}
+				step*= 0.95;
+				angle += step;
+				oGC.clearRect(-200,-200,oC.width,oC.height);
+				oGC.beginPath();
+				oGC.lineWidth = 10;
+				oGC.lineCap = 'round'
+				oGC.moveTo(170,0);
+				oGC.lineTo(200,0);
+				oGC.stroke();
+				oGC.lineWidth = 5;
+				oGC.save();
+				oGC.rotate(angle*num);
+	//		绘制扇形
+				for (var i = 1; i <= 8; i++) {
+					oGC.beginPath();
+					oGC.moveTo(0,0);
+					oGC.fillStyle = colorArr[i-1];
+					oGC.arc(0,0,150,(i-1)*45*num,i*45*num,false);
+					oGC.closePath();
+					oGC.stroke();
+					oGC.fill();
+				}
+		//		添加白盘
+				oGC.beginPath();
+				oGC.fillStyle = '#fff';
+				oGC.arc(0,0,60,0,360*Math.PI/180,false);
+				oGC.fill();
+		//		添加文字
+				for (var i = 0; i < 8; i++) {
+					oGC.save();
+					oGC.beginPath();
+					oGC.rotate((i*45+25)*num);
+					oGC.fillStyle = '#222';
+					oGC.font = '15px 微软雅黑';
+					oGC.fillText(textArr[i],75,0)
+					oGC.restore();
+				};
+				oGC.restore();
+			};
+		},30);
 	</script>
 </body>
 </html>

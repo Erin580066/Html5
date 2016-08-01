@@ -13,18 +13,36 @@
 		var oC = document.getElementById("canvas");
 		var oGC = oC.getContext('2d');
 		var angle = 0;
+		var starArr = [];
+		for (var i = 0; i < 60; i++) {
+			var starObj = {
+				r1:20+40*Math.random(),
+				r2:10+7*Math.random(),
+				x:60+(oC.width-120)*Math.random(),
+				y:60+(oC.height-120)*Math.random(),
+				num:Math.ceil(6+4*Math.random()),
+				color:'rgb('+parseInt(255*Math.random())+','+parseInt(255*Math.random())+','+parseInt(255*Math.random())+')',
+				angle:360*Math.random(),
+				changeAngle:-5+10*Math.random()
+			}
+			starArr.push(starObj);
+		}
 		
 //		画星星
 		setInterval(function(){
-			angle += 3;
+			
 			oGC.clearRect(0,0,oC.width,oC.height);
-			oGC.save();
-			oGC.translate(100,100);
-			oGC.rotate(angle*Math.PI/180);
-			oGC.scale(Math.sin(angle*Math.PI/180),Math.sin(angle*Math.PI/180));
-			oGC.globalAlpha = Math.abs(Math.sin(angle*Math.PI/180))
-			drawStar(0,0,50,20,6,'fill','red');
-			oGC.restore();
+			for (var i = 0; i < starArr.length; i++) {
+				starArr[i].angle += starArr[i].changeAngle;
+				oGC.save();
+				oGC.translate(starArr[i].x,starArr[i].y);
+				oGC.rotate(starArr[i].angle*Math.PI/180);
+				oGC.scale(Math.sin(starArr[i].angle*Math.PI/180),Math.sin(starArr[i].angle*Math.PI/180));
+				oGC.globalAlpha = Math.abs(Math.sin(starArr[i].angle*Math.PI/180))
+				drawStar(0,0,starArr[i].r1,starArr[i].r2,starArr[i].num,'fill',starArr[i].color);
+				oGC.restore();
+			}
+			
 		},50)
 		
 		function drawStar(x,y,r1,r2,num,drawStyle,color){

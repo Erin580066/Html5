@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	#canvas{background:#888;}
+</style>
+</head>
+<body>
+</body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<script>
+	var oC = document.getElementById("canvas");
+	var oGC = oC.getContext('2d');
+//	oGC.fillRect(0,0,100,100);
+////	获取像素值
+//	var imgData = oGC.getImageData(0,0,100,100);
+////	更改像素值
+//	for (var i = 0; i < imgData.width*imgData.height; i++) {
+//		imgData.data[i*4+0] = 255;
+//		imgData.data[i*4+1] = 0;
+//		imgData.data[i*4+2] = 0;
+//		imgData.data[i*4+3] = 255;
+//	}
+//	
+////	oGC.putImageData(imgData,100,100);
+//	oGC.putImageData(imgData,100,100,50,50,100,100);//后面有四个参数 代表获取像素的区域
+
+//	创建像素值
+//	var imgData = oGC.createImageData(100,100);
+//	for (var i = 0; i <imgData.height ; i++) {
+//		for (var j = 0; j < imgData.width; j++) {
+//			imgData.data[i*(imgData.width*4)+j*4+0] = 255;
+//			imgData.data[i*(imgData.width*4)+j*4+1] = 0;
+//			imgData.data[i*(imgData.width*4)+j*4+2] = 0;
+//			imgData.data[i*(imgData.width*4)+j*4+3] = 255;
+//		}
+//	}
+//	oGC.putImageData(imgData,0,0);
+	
+//	线性渐变
+		var colorObj = oGC.createLinearGradient(0,0,100,0);
+		colorObj.addColorStop(0,'red');
+		colorObj.addColorStop(0.5,'green');
+		colorObj.addColorStop(1,'blue');
+		oGC.fillStyle = colorObj;
+		oGC.fillRect(0,0,100,100);
+//		像素来控制线性渐变
+//  r g b
+//128 95 254
+//14 135 10
+//		var imgData = oGC.getImageData(0,0,100,100);
+//		for (var i = 0; i < imgData.width*imgData.height; i++) {
+//			imgData.data[i*4+0] = 128+(i/(imgData.width*imgData.height))*(14-128);
+//			imgData.data[i*4+1] = 95+(i/(imgData.width*imgData.height))*(135-95);
+//			imgData.data[i*4+2] = 254+(i/(imgData.width*imgData.height))*(10-254);
+//			imgData.data[i*4+3] = 255;
+//		}
+//		oGC.putImageData(imgData,100,100);
+		
+		var imgData=oGC.createImageData(100,100);
+		oGC.putImageData(Gradient(imgData,[255,0,0,255],[0,255,0,255]),0,0);
+		function Gradient(imgData,color1,color2){
+			for (var i = 0; i < imgData.width*imgData.height; i++) {
+				imgData.data[i*4+0] = color1[0]+(i/(imgData.width*imgData.height))*(color2[0]-color1[0]);
+				imgData.data[i*4+1] = color1[1]+(i/(imgData.width*imgData.height))*(color2[1]-color1[1]);
+				imgData.data[i*4+2] = color1[2]+(i/(imgData.width*imgData.height))*(color2[2]-color1[2]);
+				imgData.data[i*4+3] = color1[3]+(i/(imgData.width*imgData.height))*(color2[3]-color1[3]);
+			}
+			return imgData;
+		}
+</script>
+</html>

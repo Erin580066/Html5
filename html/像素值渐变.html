@@ -10,9 +10,11 @@
 <body>
 </body>
 <canvas id="canvas" width="500" height="500"></canvas>
+<img src="2.jpg" id="img" hidden/>
 <script>
 	var oC = document.getElementById("canvas");
 	var oGC = oC.getContext('2d');
+	
 //	oGC.fillRect(0,0,100,100);
 ////	获取像素值
 //	var imgData = oGC.getImageData(0,0,100,100);
@@ -40,24 +42,24 @@
 //	oGC.putImageData(imgData,0,0);
 	
 //	线性渐变
-		var colorObj = oGC.createLinearGradient(0,0,100,0);
-		colorObj.addColorStop(0,'red');
-		colorObj.addColorStop(0.5,'green');
-		colorObj.addColorStop(1,'blue');
-		oGC.fillStyle = colorObj;
-		oGC.fillRect(0,0,100,100);
+//		var colorObj = oGC.createLinearGradient(0,0,100,0);
+//		colorObj.addColorStop(0,'red');
+//		colorObj.addColorStop(0.5,'green');
+//		colorObj.addColorStop(1,'blue');
+//		oGC.fillStyle = colorObj;
+//		oGC.fillRect(0,0,100,100);
 //		像素来控制线性渐变
 //  r g b
 //128 95 254
 //14 135 10
-//		var imgData = oGC.getImageData(0,0,100,100);
-//		for (var i = 0; i < imgData.width*imgData.height; i++) {
-//			imgData.data[i*4+0] = 128+(i/(imgData.width*imgData.height))*(14-128);
-//			imgData.data[i*4+1] = 95+(i/(imgData.width*imgData.height))*(135-95);
-//			imgData.data[i*4+2] = 254+(i/(imgData.width*imgData.height))*(10-254);
-//			imgData.data[i*4+3] = 255;
-//		}
-//		oGC.putImageData(imgData,100,100);
+		var imgData = oGC.getImageData(0,0,100,100);
+		for (var i = 0; i < imgData.width*imgData.height; i++) {
+			imgData.data[i*4+0] = 128+(i/(imgData.width*imgData.height))*(14-128);
+			imgData.data[i*4+1] = 95+(i/(imgData.width*imgData.height))*(135-95);
+			imgData.data[i*4+2] = 254+(i/(imgData.width*imgData.height))*(10-254);
+			imgData.data[i*4+3] = 255;
+		}
+		oGC.putImageData(imgData,100,100);
 		
 		var imgData=oGC.createImageData(100,100);
 		oGC.putImageData(Gradient(imgData,[255,0,0,255],[0,255,0,255]),0,0);

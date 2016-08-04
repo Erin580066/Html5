@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	#canvas{background:#EDEDED;}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<img src="2.jpg" id="img" hidden>
+	<script type="text/javascript">
+		var oC = document.getElementById("canvas");
+		var oGC = oC.getContext('2d');
+		var oImg = document.getElementById("img");
+		
+		oGC.drawImage(oImg,0,0,200,240);
+//		门帘效果
+//		var imgData = oGC.getImageData(0,0,200,240)
+//		function menl(imgData,num){
+//			for (var i = 0; i < imgData.width*imgData.height; i++) {
+//				if(i%num == 0){
+//					imgData.data[i*4+0] = 0;
+//					imgData.data[i*4+1] = 0;
+//					imgData.data[i*4+2] = 0;
+//					imgData.data[i*4+3] = 0;
+//				}
+//			}
+//			return imgData;
+//		}
+//		oGC.putImageData(menl(imgData,10),200,240)
+		
+		
+//		反相效果
+//		oGC.putImageData(fanx(imgData),200,240)
+//		function fanx(imgData){
+//			for (var i = 0; i < imgData.width*imgData.height; i++) {
+//				imgData.data[i*4+0] = 255-imgData.data[i*4+0];
+//				imgData.data[i*4+1] = 255-imgData.data[i*4+1];
+//				imgData.data[i*4+2] = 255-imgData.data[i*4+2];
+//				imgData.data[i*4+3] = imgData.data[i*4+3];
+//			}
+//			return imgData;
+//		}
+//		模糊效果
+		var imgData = oGC.getImageData(0,0,200,240)
+		function mohu(imgData,num){
+			for (var j = 0; j < num;j++) {
+				for (var i = 0; i < imgData.width*imgData.height; i++) {
+					imgData.data[i*4+0]=imgData.data[(i-1)*4+0]+imgData.data[i*4+0]+imgData.data[(i+1)*4+0];
+					imgData.data[i*4+1]=imgData.data[(i-1)*4+1]+imgData.data[i*4+1]+imgData.data[(i+1)*4+1];
+					imgData.data[i*4+2]=imgData.data[(i-1)*4+2]+imgData.data[i*4+2]+imgData.data[(i+1)*4+2];
+					imgData.data[i*4+3]=imgData.data[i*4+3]
+				}
+			}
+			return imgData;
+		}
+		oGC.putImageData(mohu(imgData,2),200,240)
+	</script>
+</body>
+</html>

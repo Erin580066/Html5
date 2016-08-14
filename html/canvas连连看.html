@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	#canvas{
+		background:#fff;
+	}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width="" height=""></canvas>
+	<script type="text/javascript">
+		var oC = document.getElementById("canvas");
+		oC.width = window.innerWidth;
+		oC.height = window.innerHeight;
+		var oGC = oC.getContext('2d');
+		var arr = [];
+//		创建种子文件
+		for (var i = 0; i < 8; i++) {
+			var reactObj = {
+				width:50,
+				height:50,
+				color:"rgba("+parseInt(255*Math.random())+","+parseInt(255*Math.random())+","+parseInt(255*Math.random())+",255)"
+			}
+			arr.push(reactObj);
+		}
+//		指定一共的色块
+		var newArr = [];
+		for (var i = 0; i < 2; i++) {
+			for (var j = 0; j < arr.length; j++) {
+				newArr.push(arr[j]);
+			}
+		}
+//		绘制到画布
+		var rows = 0;
+		var cols = 0;
+		for (var i = 0; i < newArr.length; i++) {
+			if(i%5 == 0){
+				rows++;
+				cols = 0;
+			}
+			oGC.beginPath();
+			oGC.fillStyle = newArr[i].color;
+			oGC.rect(cols*(newArr[i].width+5),rows*(newArr[i].height+5),newArr[i].width,newArr[i].height)
+			oGC.fill();
+			cols++;
+		}
+	</script>
+</body>
+</html>

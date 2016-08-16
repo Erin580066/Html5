@@ -5,47 +5,100 @@
 <title></title>
 <style type="text/css">
 	#canvas{
-		background:#fff;
+		background:#eeeeee;
 	}
 </style>
 </head>
 <body>
-	<canvas id="canvas" width="" height=""></canvas>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script src="../js/event.js" ></script>
 	<script type="text/javascript">
 		var oC = document.getElementById("canvas");
-		oC.width = window.innerWidth;
-		oC.height = window.innerHeight;
 		var oGC = oC.getContext('2d');
 		var arr = [];
+		var arrnum = [];
+		var step = 2;//游戏难度
 //		创建种子文件
-		for (var i = 0; i < 8; i++) {
-			var reactObj = {
-				width:50,
-				height:50,
-				color:"rgba("+parseInt(255*Math.random())+","+parseInt(255*Math.random())+","+parseInt(255*Math.random())+",255)"
+			for (var i = 0; i < 8; i++) {
+				var reactObj = {
+					width:50,
+					height:50,
+					color:"rgba("+parseInt(255*Math.random())+","+parseInt(255*Math.random())+","+parseInt(255*Math.random())+",255)"
+				}
+				arr.push(reactObj);
 			}
-			arr.push(reactObj);
-		}
 //		指定一共的色块
 		var newArr = [];
-		for (var i = 0; i < 2; i++) {
-			for (var j = 0; j < arr.length; j++) {
-				newArr.push(arr[j]);
+		var num = 0;//判断点击时候方块的个数
+		function sum(step){
+			for (var i = 0; i < step; i++) {
+				for (var j = 0; j < arr.length; j++) {
+					var newObj = {};
+					for(var attr in arr[j]){
+						newObj[attr]=arr[j][attr];
+					}
+					newArr.push(newObj);
+				}
 			}
 		}
+		sum(step);
 //		绘制到画布
-		var rows = 0;
-		var cols = 0;
-		for (var i = 0; i < newArr.length; i++) {
-			if(i%5 == 0){
-				rows++;
-				cols = 0;
+		function sumDraw(){
+			var rows = 0;
+			var cols = 0;
+			for (var i = 0; i < newArr.length; i++) {
+				if(i%4 == 0){
+					rows++;
+					cols = 0;
+				}
+				oGC.beginPath();
+				oGC.fillStyle = newArr[i].color;
+				oGC.rect(cols*(newArr[i].width+5),rows*(newArr[i].height+5),newArr[i].width,newArr[i].height)
+				oGC.fill();
+				newArr[i].x = cols*(newArr[i].width+5);
+				newArr[i].y = rows*(newArr[i].height+5);	
+				cols++;
 			}
-			oGC.beginPath();
-			oGC.fillStyle = newArr[i].color;
-			oGC.rect(cols*(newArr[i].width+5),rows*(newArr[i].height+5),newArr[i].width,newArr[i].height)
-			oGC.fill();
-			cols++;
+		};
+		sumDraw();
+		var arrs = [];
+		oC.onclick = function(e){
+			var mx = e.layerX;
+			var my = e.layerY;
+			function newDraw(){
+				oGC.clearRect(0,0,500,500)
+				for (var i = 0; i < newArr.length; i++) {
+					oGC.fillStyle = newArr[i].color
+					var str = newArr[i].x+','+newArr[i].y+','+newArr[i].width+','+newArr[i].height;
+					var event = new addEvent(oGC,'rect',str,function(){
+						if(i==arrnum[0]||i ==arrnum[1]){
+							return;
+						}
+						arrs.push(newArr[i]);
+						arrnum.push(i)
+						if(arrs.length == 2){
+							if(arrs[0].color == arrs[1].color&&arrnum[0]!=arrnum[1]){
+								arrs[0].color = 'rgba(0,0,0,0)';
+								arrs[1].color = 'rgba(0,0,0,0)';
+								newDraw();
+								num++;//点击成功后就让num++
+								if(num == newArr.length/2){
+									newArr = [];
+									alert('恭喜你过关了');
+									step*=2;
+									sum(step);
+									sumDraw();
+									num = 0;
+								}
+							}
+							arrs = [];
+							arrnum = [];
+						}
+					})
+					event.add(mx,my)
+				}
+			};
+			newDraw();
 		}
 	</script>
 </body>

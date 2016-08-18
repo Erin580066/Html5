@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+body{overflow: hidden;}
+	#canvas{
+		background:#eeeeee;
+	}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width="" height=""></canvas>
+	<script type="text/javascript">
+		var oC = document.getElementById("canvas");
+		oC.width = window.innerWidth;
+		oC.height = window.innerHeight;
+		var oGC = oC.getContext('2d');
+		oGC.translate(oC.width/5,(oC.height/2));
+		var arr = [];
+		for (var i = 0; i < 80; i++) {
+			var arcObj = {
+				r:30+5*Math.random(),
+				x_3d:-200+i*30,
+				y_3d:-100+200*Math.random(),
+				z_3d:i*10,
+				z_speed:10+10*Math.random()
+			}
+			arr.push(arcObj);
+		}
+		var focuslen = 300;//焦距
+		setInterval(function(){
+			oGC.clearRect(-(oC.width/5),-(oC.height/2),oC.width,oC.height);
+			var newarr = arr.sort(function(a,b){
+				return a.z_3d>b.z_3d
+			})
+			for (var i = 0; i < newarr.length; i++) {
+				arr[i].z_3d += arr[i].z_speed;
+				if(arr[i].z_3d>600||arr[i].z_3d<=-30){
+					arr[i].z_speed*= -1;
+				}
+				var scales = focuslen/(focuslen+arr[i].z_3d);
+				var x = arr[i].x_3d * scales;
+				var y = arr[i].y_3d * scales;
+				oGC.save();
+				oGC.translate(x,y);
+				oGC.scale(scales,scales)
+				oGC.beginPath();
+				var colorObj = oGC.createRadialGradient(3,3,0,0,0,30);
+				colorObj.addColorStop(0,'#cbc0f3');
+				colorObj.addColorStop(1,'#06198b');
+				oGC.fillStyle = colorObj;
+				oGC.arc(0,0,30,0,360*Math.PI/180);
+				oGC.fill();
+				oGC.restore();
+			}
+		},50)
+		
+	</script>
+</body>
+</html>
